@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("api/v1/bookstore")
 public class BookController {
@@ -30,15 +29,28 @@ public class BookController {
         return modelAndView;
     }
 
-    @GetMapping("/search/{searchTerm}")
-    public  List<Book> searchBooks(@PathVariable(name = "searchTerm") String searchTerm) {
-        List<Book> books = service.searchBooks(searchTerm);
-        return books;
+    @GetMapping("/add")
+    public ModelAndView addBook() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("AddNewBook.html");
+        return modelAndView;
     }
 
-    @PostMapping("/")
-    public long addBook(@RequestBody Book book) {
-        return service.addBook(book);
+    @PostMapping("/add")
+    public ModelAndView addBook(@ModelAttribute Book book) {
+        service.addBook(book);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("SuccessPage.html");
+        return modelAndView;
+    }
+
+    @GetMapping("/search")
+    public ModelAndView searchBooks(@RequestParam(name = "query") String query, Model model) {
+        List<Book> selectedBooks = service.searchBooks(query);
+        model.addAttribute("books", selectedBooks);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("HomePage.html");
+        return modelAndView;
     }
 
     @GetMapping("/{id}")
@@ -51,9 +63,22 @@ public class BookController {
         return service.deleteBook(id);
     }
 
-    @PutMapping("/update/{id}")
-    public Book deleteBook(@RequestBody Book book, @PathVariable(name = "id") int id) {
-        return service.updateBook(id, book);
+    @GetMapping("/update/{id}")
+    public ModelAndView updateBook(@PathVariable(name = "id") int id, Model model) {
+        Book book = service.getById(id);
+        model.addAttribute("book", book);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("EditBook.html");
+        return modelAndView;
+    }
+
+    @PostMapping("/update-book")
+    public ModelAndView updateBook(@ModelAttribute Book book, Model model) {
+        service.updateBook(book.getId(), book);
+        model.addAttribute("book", book);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("SuccessPage.html");
+        return modelAndView;
     }
 
 }
