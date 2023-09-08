@@ -8,13 +8,13 @@ public interface BooksServiceInterface {
 
     List< Book > getAllBooks();
 
-    Book getById(long id);
+    Book getById(int id);
 
     List< Book > searchBooks(String searchTerm);
 
     int addBook(Book newBook);
 
-    boolean deleteBook(long id);
+    boolean deleteBook(int id);
 
     Book updateBook(int idToUpdate, Book updatedBook);
 

@@ -1,7 +1,6 @@
 package com.bookstore.services;
 
 import com.bookstore.data.BooksDAOInterface;
-import com.bookstore.data.BooksRepositoryInterface;
 import com.bookstore.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,27 +17,27 @@ public class BooksService implements BooksServiceInterface {
     }
 
     @Override
-    public Book getById(long id) {
-        return null;
+    public Book getById(int id) {
+        return bookDAO.getById(id);
     }
 
     @Override
     public List< Book > searchBooks(String searchTerm) {
-        return null;
+        return bookDAO.searchBooks(searchTerm);
     }
 
     @Override
     public int addBook(Book newBook) {
-        return 0;
+        return bookDAO.addBook(newBook);
     }
 
     @Override
-    public boolean deleteBook(long id) {
-        return false;
+    public boolean deleteBook(int id) {
+        return bookDAO.deleteBook(id);
     }
 
     @Override
     public Book updateBook(int idToUpdate, Book updatedBook) {
-        return null;
+        return bookDAO.updateBook(idToUpdate, updatedBook);
     }
 }

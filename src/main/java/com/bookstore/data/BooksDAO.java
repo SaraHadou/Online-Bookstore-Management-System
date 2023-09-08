@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BooksDAO implements BooksDAOInterface < Book > {
@@ -25,36 +24,48 @@ public class BooksDAO implements BooksDAOInterface < Book > {
 
     @Override
     public List< Book > getAllBooks() {
-        Iterable<Book> entities = bookRepo.findAll();
-        List<Book> books = new ArrayList<>();
-        for (Book entity: entities) {
-            books.add(modelMapper.map(entity, Book.class));
-        }
-        return books;
+        return bookRepo.findAll();
     }
 
     @Override
-    public Book getById(long id) {
-        return null;
+    public Book getById(int id) {
+        return bookRepo.findById(id).orElse(null);
     }
 
     @Override
     public List< Book > searchBooks(String searchTerm) {
-        return null;
+        return bookRepo.findByCategoryContainingIgnoreCase(searchTerm);
     }
 
     @Override
-    public int addBook(Book newOrder) {
-        return 0;
+    public int addBook(Book newBook) {
+        Book result =  bookRepo.save(newBook);
+        if (result == null) {
+            return 0;
+        } else {
+            return result.getId();
+        }
     }
 
     @Override
     public boolean deleteBook(int id) {
-        return false;
+        bookRepo.deleteById(id);
+        return true;
     }
 
     @Override
     public Book updateBook(int idToUpdate, Book updatedBook) {
-        return null;
+        Book existingBook = bookRepo.findById(idToUpdate).orElse(null);
+
+        if (existingBook != null) {
+            existingBook.setName(updatedBook.getName());
+            existingBook.setAuthor(updatedBook.getAuthor());
+            existingBook.setCategory(updatedBook.getCategory());
+            existingBook.setPrice(updatedBook.getPrice());
+            bookRepo.save(existingBook);
+        }
+        return existingBook;
     }
+
 }
+
