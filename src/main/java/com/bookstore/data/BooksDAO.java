@@ -1,7 +1,6 @@
 package com.bookstore.data;
 
 import com.bookstore.models.Book;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -18,8 +17,6 @@ public class BooksDAO implements BooksDAOInterface < Book > {
     public BooksDAO(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
-    ModelMapper modelMapper = new ModelMapper();
 
 
     @Override
