@@ -52,10 +52,14 @@ public class BookController {
         modelAndView.setViewName("HomePage.html");
         return modelAndView;
     }
-
+    
     @GetMapping("/{id}")
-    public Book getById(@PathVariable(name = "id") int id) {
-        return service.getById(id);
+    public ModelAndView getById(@PathVariable(name = "id") int id, Model model) {
+        Book book =  service.getById(id);
+        model.addAttribute("book", book);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("BookDetails.html");
+        return modelAndView;
     }
 
     @GetMapping("/delete/{id}")
