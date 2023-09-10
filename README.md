@@ -2,7 +2,7 @@
 
 **How to run this project:**
 
-1- First, get SQL statements existeing in data.sql file and run it on your MySQLWorkbench. 
+1- First, get SQL statements existing in data.sql file and run it on your MySQLWorkbench. 
 
 2- Upload the code in IntellJ or whatever your favourite IDE.
 
