@@ -1,4 +1,4 @@
-package com.bookstore.data;
+package com.bookstore.repository;
 
 import com.bookstore.models.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +9,7 @@ import java.util.List;
 @Service
 public interface BooksRepositoryInterface
         extends JpaRepository < Book, Integer > {
+
     public List<Book> findByCategoryContainingIgnoreCase(String searchTerm);
+
 }

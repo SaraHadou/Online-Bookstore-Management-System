@@ -1,4 +1,4 @@
-package com.bookstore.data;
+package com.bookstore.repository;
 
 import java.util.List;
 

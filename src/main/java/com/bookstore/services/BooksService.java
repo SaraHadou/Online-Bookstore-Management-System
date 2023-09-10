@@ -1,11 +1,13 @@
 package com.bookstore.services;
 
-import com.bookstore.data.BooksDAOInterface;
+import com.bookstore.repository.BooksDAOInterface;
 import com.bookstore.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BooksService implements BooksServiceInterface {
 
     @Autowired

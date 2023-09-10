@@ -1,4 +1,4 @@
-package com.bookstore.data;
+package com.bookstore.repository;
 
 import com.bookstore.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ public class BooksDAO implements BooksDAOInterface < Book > {
     public BooksDAO(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
 
     @Override
     public List< Book > getAllBooks() {

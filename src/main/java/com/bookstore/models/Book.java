@@ -3,37 +3,42 @@ package com.bookstore.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "BOOKS")
+@Table(name = "books")
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    @SequenceGenerator(name = "book_id_sequence", sequenceName = "book_id_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_id_sequence")
     private int id;
 
-    @Column(name = "Book Name")
+    @Column(name = "TITLE")
     private String name;
 
-    @Column(name = "Author")
+    @Column(name = "AUTHOR")
     private String author;
 
-    @Column(name = "Category")
+    @Column(name = "CATEGORY")
     private String category;
 
-    @Column(name = "Price($)")
+    @Column(name = "PRICE")
     private double price;
 
-    public Book(int id, String name, String author, String category, double price) {
-        this.id = id;
+    @Column(name = "AVAILABLE")
+    private boolean available = true;
+
+    @ManyToOne
+    @JoinColumn(name = "BORROWER_ID")
+    private User borrower;
+
+    public Book(String name, String author, String category, double price) {
         this.name = name;
         this.author = author;
         this.category = category;
         this.price = price;
     }
+
     public Book() {
     }
-
 
     public int getId() {
         return id;
@@ -75,6 +80,22 @@ public class Book {
         this.category = category;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setBorrower(User borrower) {
+        this.borrower = borrower;
+    }
+
+    public User getBorrower() {
+        return borrower;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -85,4 +106,5 @@ public class Book {
                 ", price=" + price +
                 '}';
     }
+
 }
