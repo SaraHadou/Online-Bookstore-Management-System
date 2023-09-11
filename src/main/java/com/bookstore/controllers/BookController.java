@@ -1,7 +1,6 @@
 package com.bookstore.controllers;
 
-import com.bookstore.models.User;
-import com.bookstore.repository.BooksDAOInterface;
+import com.bookstore.repository.BookDAOInterface;
 import com.bookstore.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,10 +13,10 @@ import java.util.List;
 @RequestMapping("api/v1/bookstore")
 public class BookController {
 
-    final BooksDAOInterface<Book> service;
+    final BookDAOInterface<Book> service;
 
     @Autowired
-    public BookController(BooksDAOInterface<Book> service) {
+    public BookController(BookDAOInterface<Book> service) {
         this.service = service;
     }
 
@@ -116,23 +115,5 @@ public class BookController {
             return modelAndView;
         }
     }
-//
-//    @GetMapping("/borrow/{id}")
-//    public ModelAndView borrowBook(@PathVariable int id) {
-//        User user =
-//        Book book = service.getById(id);
-//        if (book != null) {
-//            book.setAvailable(false);
-//            book.setBorrower();
-//            service.updateBook(id, book);
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("SuccessPage.html");
-//            return modelAndView;
-//        } else {
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("FailurePage.html");
-//            return modelAndView;
-//        }
-//    }
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsersService implements UsersServiceInterface {
+public class UserService implements UserServiceInterface {
 
     @Autowired
     private UserRepositoryInterface userRepo;
@@ -21,7 +21,7 @@ public class UsersService implements UsersServiceInterface {
 
     @Override
     public Optional<User> getByUsername(String username) {
-        return userRepo.findByUsernameContainingIgnoreCase(username);
+        return userRepo.findByEmail(username);
     }
 
 }

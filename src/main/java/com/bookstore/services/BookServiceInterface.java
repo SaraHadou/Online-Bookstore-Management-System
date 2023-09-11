@@ -4,7 +4,7 @@ import com.bookstore.models.Book;
 
 import java.util.List;
 
-public interface BooksServiceInterface {
+public interface BookServiceInterface {
 
     List< Book > getAllBooks();
 

@@ -2,6 +2,8 @@ package com.bookstore.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "books")
 public class Book {
@@ -25,6 +27,9 @@ public class Book {
 
     @Column(name = "AVAILABLE")
     private boolean available = true;
+
+    @Column(name = "BORROWINGDATE")
+    private LocalDateTime borrowingDate;
 
     @ManyToOne
     @JoinColumn(name = "BORROWER_ID")
@@ -86,6 +91,14 @@ public class Book {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public LocalDateTime getBorrowingDate() {
+        return borrowingDate;
+    }
+
+    public void setBorrowingDate(LocalDateTime borrowingDate) {
+        this.borrowingDate = borrowingDate;
     }
 
     public void setBorrower(User borrower) {

@@ -5,7 +5,7 @@ import com.bookstore.models.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface UsersServiceInterface {
+public interface UserServiceInterface {
 
     List< User > getAllUsers();
 

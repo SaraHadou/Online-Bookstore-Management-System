@@ -14,12 +14,12 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/login")
-    public ModelAndView Login() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("LoginForm.html");
-        return modelAndView;
-    }
+//    @GetMapping("/login")
+//    public ModelAndView Login() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("LoginForm.html");
+//        return modelAndView;
+//    }
 
 //    @PostMapping("/login")
 //    public ModelAndView Login(@RequestParam("username") String username,

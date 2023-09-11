@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public interface UserRepositoryInterface
-        extends JpaRepository< User, Integer > {
-    Optional<User> findByUsernameContainingIgnoreCase(String username);
-//    Boolean existByUsername(String username);
-
+public interface UserRepositoryInterface extends JpaRepository< User, Integer > {
+    Optional<User> findByEmail(String email);
 }

@@ -8,14 +8,14 @@ import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class BooksDAO implements BooksDAOInterface < Book > {
+public class BookDAO implements BookDAOInterface< Book > {
 
     @Autowired
-    BooksRepositoryInterface bookRepo;
+    BookRepositoryInterface bookRepo;
 
     private JdbcTemplate jdbcTemplate;
 
-    public BooksDAO(DataSource dataSource) {
+    public BookDAO(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -47,6 +47,11 @@ public class BooksDAO implements BooksDAOInterface < Book > {
         } else {
             return result.getId();
         }
+    }
+
+    @Override
+    public Book save(Book book) {
+        return bookRepo.save(book);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public interface BooksRepositoryInterface
+public interface BookRepositoryInterface
         extends JpaRepository < Book, Integer > {
 
     List<Book> findByCategoryContainingIgnoreCase(String searchTerm);
