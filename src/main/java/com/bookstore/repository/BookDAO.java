@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class BooksDAO implements BooksDAOInterface < Book > {
@@ -31,6 +32,11 @@ public class BooksDAO implements BooksDAOInterface < Book > {
     @Override
     public List< Book > searchBooks(String searchTerm) {
         return bookRepo.findByCategoryContainingIgnoreCase(searchTerm);
+    }
+
+    @Override
+    public List< Book > searchBooks(LocalDateTime dateTime) {
+        return bookRepo.findByBorrowingDateBeforeAndAvailableIsFalse(dateTime);
     }
 
     @Override
