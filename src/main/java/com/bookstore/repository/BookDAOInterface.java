@@ -14,4 +14,5 @@ public interface BookDAOInterface< T > {
     public T save(T book);
     public boolean deleteBook(int id);
     public T updateBook(int idToUpdate, T updatedBook);
+    public List<T> getAllBorrowedBooks();
 }

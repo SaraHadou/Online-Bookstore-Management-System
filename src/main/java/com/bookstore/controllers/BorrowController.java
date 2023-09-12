@@ -1,5 +1,6 @@
 package com.bookstore.controllers;
 
+import com.bookstore.auth.RegisterRequest;
 import com.bookstore.models.Book;
 import com.bookstore.models.User;
 import com.bookstore.repository.BookDAOInterface;
@@ -7,14 +8,13 @@ import com.bookstore.repository.UserRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -82,6 +82,16 @@ public class BorrowController {
             book.setBorrowingDate(null);
             bookService.updateBook(book.getId(), book);
         }
+    }
+
+    @GetMapping("/borrowed")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ModelAndView getAllBorrowedBooks(Model model) {
+        List<Book> borrowedBooks = bookService.getAllBorrowedBooks();
+        model.addAttribute("books", borrowedBooks);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("HomePage.html");
+        return modelAndView;
     }
 
 }

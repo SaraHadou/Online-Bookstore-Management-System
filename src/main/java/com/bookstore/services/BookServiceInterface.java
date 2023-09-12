@@ -18,4 +18,6 @@ public interface BookServiceInterface {
 
     Book updateBook(int idToUpdate, Book updatedBook);
 
+    List<Book> getAllBorrowedBooks();
+
 }

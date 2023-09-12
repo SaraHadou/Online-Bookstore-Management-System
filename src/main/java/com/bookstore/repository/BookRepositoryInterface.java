@@ -15,4 +15,6 @@ public interface BookRepositoryInterface
 
     List<Book> findByBorrowingDateBeforeAndAvailableIsFalse(LocalDateTime dateTime);
 
+    List<Book> findByBorrowerIsNotNull();
+
 }

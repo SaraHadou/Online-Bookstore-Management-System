@@ -25,17 +25,14 @@
                                 <a class="nav-link active text-white" aria-current="page" th:href="@{/api/v1/bookstore/}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="my_books">MyBooks</a>
-                            </li>
-                            <li class="nav-item">
-                                <form class="form-inline d-flex" th:action="@{/api/v1/bookstore/search}" method="get" >
-                                    <input class="form-control me-2" id="query" name="query" type="text" placeholder="Search by category" required />
-                                    <button class="btn btn-primary" type="submit">Search</button>
-                                </form>
+                                <a class="nav-link text-white" href="borrowed">Borrowed Books</a>
                             </li>
                         </ul>
                         <div>
-                            <a class="nav-link text-white" th:href="@{/api/v1/bookstore/login}">Login</a>
+                            <form class="form-inline d-flex" th:action="@{/api/v1/bookstore/search}" method="get" >
+                                <input class="form-control me-2" id="query" name="query" type="text" placeholder="Search by category" required />
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </form>
                         </div>
                     </div>
                 </div>

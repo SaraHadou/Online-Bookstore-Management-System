@@ -42,4 +42,9 @@ public class BookService implements BookServiceInterface {
     public Book updateBook(int idToUpdate, Book updatedBook) {
         return bookDAO.updateBook(idToUpdate, updatedBook);
     }
+
+    @Override
+    public List<Book> getAllBorrowedBooks() {
+        return bookDAO.getAllBorrowedBooks();
+    }
 }

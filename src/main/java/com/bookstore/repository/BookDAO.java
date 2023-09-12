@@ -74,5 +74,10 @@ public class BookDAO implements BookDAOInterface< Book > {
         return existingBook;
     }
 
+    @Override
+    public List< Book > getAllBorrowedBooks() {
+        return bookRepo.findByBorrowerIsNotNull();
+    }
+
 }
 
