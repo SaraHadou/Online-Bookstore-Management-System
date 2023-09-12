@@ -6,6 +6,7 @@ import com.bookstore.repository.BookDAOInterface;
 import com.bookstore.repository.UserRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class BorrowController {
     }
 
     @GetMapping("/borrow/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ModelAndView borrowBook(@PathVariable int id) {
 
         // Assume that user_1 is the borrower
@@ -52,6 +54,7 @@ public class BorrowController {
     }
 
     @GetMapping("/reset/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView resetBook(@PathVariable int id) {
         Book book = bookService.getById(id);
         if (book != null) {

@@ -3,11 +3,13 @@ package com.bookstore.controllers;
 import com.bookstore.repository.BookDAOInterface;
 import com.bookstore.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("api/v1/bookstore")
@@ -30,6 +32,7 @@ public class BookController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView addBook() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("AddNewBook.html");
@@ -37,6 +40,7 @@ public class BookController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView addBook(@ModelAttribute Book book) {
         if (book instanceof Book) {
             service.addBook(book);
@@ -51,6 +55,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasRole('USER')")
     public ModelAndView searchBooks(@RequestParam(name = "query") String query, Model model) {
         List<Book> selectedBooks = service.searchBooks(query);
         if (selectedBooks != null) {
@@ -66,6 +71,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ModelAndView getById(@PathVariable(name = "id") int id, Model model) {
         Book book =  service.getById(id);
         if (book != null){
@@ -81,6 +87,7 @@ public class BookController {
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView deleteBook(@PathVariable(name = "id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         if (service.deleteBook(id)) {
@@ -93,6 +100,7 @@ public class BookController {
     }
 
     @GetMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView updateBook(@PathVariable(name = "id") int id, Model model) {
         Book book = service.getById(id);
         model.addAttribute("book", book);
@@ -102,6 +110,7 @@ public class BookController {
     }
 
     @PostMapping("/update-book")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView updateBook(@ModelAttribute Book book, Model model) {
         if (book != null) {
             service.updateBook(book.getId(), book);
